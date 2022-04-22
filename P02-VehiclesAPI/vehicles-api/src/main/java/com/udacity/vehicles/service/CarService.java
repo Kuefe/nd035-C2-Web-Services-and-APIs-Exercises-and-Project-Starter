@@ -59,7 +59,7 @@ public class CarService {
         if (optionalCar.isPresent())
             car = optionalCar.get();
         else
-            throw new RuntimeException();
+            throw new CarNotFoundException("This car does not exist");
 
 
         /**
@@ -97,6 +97,7 @@ public class CarService {
                     .map(carToBeUpdated -> {
                         carToBeUpdated.setDetails(car.getDetails());
                         carToBeUpdated.setLocation(car.getLocation());
+                        carToBeUpdated.setCondition(car.getCondition());
                         return repository.save(carToBeUpdated);
                     }).orElseThrow(CarNotFoundException::new);
         }
@@ -120,7 +121,7 @@ public class CarService {
         if (optionalCar.isPresent())
             car = optionalCar.get();
         else
-            throw new RuntimeException();
+            throw new CarNotFoundException("This car does not exist");
 
         /**
          * Delete the car from the repository.
